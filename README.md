@@ -11,7 +11,7 @@ This module depends on and includes configuration for the [terraform-aws-modules
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.4.6 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.6.0 |
 
 ## Providers
 
