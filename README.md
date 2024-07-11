@@ -1,9 +1,11 @@
 <!-- BEGIN_TF_DOCS -->
-# terraform-aws-ecs-ec2
+# terraform-aws-ecs
+
+A Terraform module to create ECS Cluster and ECS Service that rely on self-managed EC2 instances.
 
 ## Notice
 
-This module depends on and includes configuration for the [terraform-aws-ecs](https://github.com/terraform-aws-modules/terraform-aws-ecs), which is licensed under the Apache License 2.0. You can find the original license in the `LICENSE` file of the public module.
+This module depends on and includes configuration for the [terraform-aws-modules/terraform-aws-ecs](https://github.com/terraform-aws-modules/terraform-aws-ecs), which is licensed under the Apache License 2.0. You can find the original license in the `LICENSE` file of the public module.
 
 ## Requirements
 
