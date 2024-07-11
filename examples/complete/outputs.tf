@@ -48,10 +48,10 @@ output "public_subnets_cidr_blocks" {
 
 output "ecs_cluster_arn" {
   description = "ARN of the ECS Cluster"
-  value       = module.ecs_ec2.cluster_arn
+  value       = module.ecs.cluster_arn
 }
 
 output "ecs_service_id" {
   description = "Identifier of the ECS Service"
-  value       = module.ecs_ec2.service_id
+  value       = module.ecs.service_id
 }
