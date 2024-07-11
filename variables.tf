@@ -35,7 +35,7 @@ variable "cluster_arn" {
   default     = null
 
   validation {
-    condition     = var.create_cluster == true || startswith(var.cluster_arn != null ? var.cluster_arn : "", "arn:")
+    condition     = var.cluster_arn == null || startswith(var.cluster_arn != null ? var.cluster_arn : "", "arn:")
     error_message = "Specified Cluster ARN must be a valid ARN starting with \"arn:\"."
   }
 }
