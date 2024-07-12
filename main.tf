@@ -34,5 +34,8 @@ module "ecs_service" {
   launch_type              = "EC2"
   requires_compatibilities = ["EC2"]
 
+  enable_autoscaling   = false
+  autoscaling_policies = {}
+
   tags = var.service_tags
 }
