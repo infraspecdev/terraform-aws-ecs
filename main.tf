@@ -34,6 +34,18 @@ module "ecs_service" {
   launch_type              = "EC2"
   requires_compatibilities = ["EC2"]
 
+  container_definitions = {
+    demo = {
+      image         = "amazon/amazon-ecs-sample:latest"
+      port_mappings = []
+
+      readonly_root_filesystem = false
+
+      enable_cloudwatch_logging   = false
+      create_cloudwatch_log_group = false
+    }
+  }
+
   enable_autoscaling   = false
   autoscaling_policies = {}
 
