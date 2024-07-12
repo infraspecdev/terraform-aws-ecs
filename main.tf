@@ -46,6 +46,9 @@ module "ecs_service" {
     }
   }
 
+  create_task_exec_policy = false
+  create_security_group   = false
+
   enable_autoscaling   = false
   autoscaling_policies = {}
 
