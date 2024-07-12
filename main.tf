@@ -11,6 +11,8 @@ module "ecs_cluster" {
   cluster_name                          = var.cluster_name
   default_capacity_provider_use_fargate = false
 
+  create_cloudwatch_log_group = false
+
   tags = var.cluster_tags
 }
 
