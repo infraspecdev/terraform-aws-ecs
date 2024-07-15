@@ -49,7 +49,6 @@ No inputs.
 | Name | Description |
 |------|-------------|
 | <a name="output_ecs_cluster_arn"></a> [ecs\_cluster\_arn](#output\_ecs\_cluster\_arn) | ARN of the ECS Cluster |
-| <a name="output_ecs_service_id"></a> [ecs\_service\_id](#output\_ecs\_service\_id) | Identifier of the ECS Service |
 | <a name="output_private_subnets"></a> [private\_subnets](#output\_private\_subnets) | Identifiers of the Private Subnets |
 | <a name="output_private_subnets_arns"></a> [private\_subnets\_arns](#output\_private\_subnets\_arns) | ARNs of the Private Subnets |
 | <a name="output_private_subnets_cidr_blocks"></a> [private\_subnets\_cidr\_blocks](#output\_private\_subnets\_cidr\_blocks) | CIDR Blocks of the Private Subnets |

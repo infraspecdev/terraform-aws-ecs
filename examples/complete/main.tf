@@ -19,13 +19,6 @@ locals {
   # ECS Cluster
   cluster_name = "${local.name_prefix}my-cluster"
 
-  # ECS Service
-  service_name = "${local.name_prefix}my-service"
-  service_task_resource_allocation = {
-    cpu    = 512
-    memory = 512
-  }
-
   default_tags = {
     Environment = "Dev"
     ManagedBy   = "Terraform"
@@ -39,14 +32,7 @@ locals {
 module "ecs" {
   source = "../../"
 
-  # Cluster
   cluster_name = local.cluster_name
-
-  # Services
-  service_name       = local.service_name
-  service_subnet_ids = flatten([module.vpc.private_subnets, module.vpc.public_subnets])
-  service_cpu        = local.service_task_resource_allocation.cpu
-  service_memory     = local.service_task_resource_allocation.memory
 }
 
 ################################################################################

@@ -50,8 +50,3 @@ output "ecs_cluster_arn" {
   description = "ARN of the ECS Cluster"
   value       = module.ecs.cluster_arn
 }
-
-output "ecs_service_id" {
-  description = "Identifier of the ECS Service"
-  value       = module.ecs.service_id
-}
