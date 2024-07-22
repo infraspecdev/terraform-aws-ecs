@@ -2,53 +2,42 @@
 # ECS Cluster
 ################################################################################
 
-resource "aws_ecs_cluster" "this" {
-  name = var.cluster_name
+module "cluster" {
+  source = "./modules/cluster"
 
-  dynamic "configuration" {
-    for_each = var.execute_command_configuration != null != null ? [1] : []
+  name    = var.cluster_name
+  setting = var.cluster_setting
+  tags    = var.cluster_tags
+}
 
-    content {
-      dynamic "execute_command_configuration" {
-        for_each = var.execute_command_configuration != null ? [1] : []
+################################################################################
+# Autoscaling Group
+################################################################################
 
-        content {
-          kms_key_id = try(var.execute_command_configuration.kms_key_id, null)
-          logging    = try(var.execute_command_configuration.logging, null)
+module "asg" {
+  source = "./modules/asg"
 
-          dynamic "log_configuration" {
-            for_each = try(var.execute_command_configuration.log_configuration, null) != null ? [1] : []
+  cluster_name = module.cluster.name
 
-            content {
-              cloud_watch_encryption_enabled = try(var.execute_command_configuration.log_configuration.cloud_watch_encryption_enabled, null)
-              cloud_watch_log_group_name     = try(var.execute_command_configuration.log_configuration.cloud_watch_log_group_name, null)
-              s3_bucket_name                 = try(var.execute_command_configuration.log_configuration.s3_bucket_name, null)
-              s3_bucket_encryption_enabled   = try(var.execute_command_configuration.log_configuration.s3_bucket_encryption_enabled, null)
-              s3_key_prefix                  = try(var.execute_command_configuration.log_configuration.s3_key_prefix, null)
-            }
-          }
-        }
-      }
-    }
-  }
+  name                = var.asg_name
+  vpc_zone_identifier = var.asg_vpc_zone_identifier
+  desired_capacity    = var.asg_desired_capacity
+  min_size            = var.asg_min_size
+  max_size            = var.asg_max_size
+  instances_tags      = var.asg_instances_tags
+  tags                = var.asg_tags
 
-  dynamic "service_connect_defaults" {
-    for_each = var.service_connect_defaults != null ? [1] : []
+  # Launch Template
+  create_launch_template = var.asg_create_launch_template
+  launch_template_id     = var.asg_launch_template_id
+  launch_template        = var.asg_launch_template
 
-    content {
-      namespace = var.service_connect_defaults.namespace
-    }
-  }
+  # IAM Role
+  iam_role_name               = var.asg_iam_role_name
+  iam_role_policy_attachments = var.asg_iam_role_policy_attachments
+  iam_role_tags               = var.asg_iam_role_tags
 
-  dynamic "setting" {
-    for_each = var.setting
-    iterator = setting
-
-    content {
-      name  = setting.value.name
-      value = setting.value.value
-    }
-  }
-
-  tags = var.tags
+  # IAM Instance Profile
+  iam_instance_profile_name = var.asg_iam_instance_profile_name
+  iam_instance_profile_tags = var.asg_iam_instance_profile_tags
 }
