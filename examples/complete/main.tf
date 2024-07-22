@@ -33,6 +33,13 @@ module "ecs" {
   source = "../../"
 
   cluster_name = local.cluster_name
+
+  setting = [
+    {
+      name  = "containerInsights"
+      value = "enabled"
+    }
+  ]
 }
 
 ################################################################################
