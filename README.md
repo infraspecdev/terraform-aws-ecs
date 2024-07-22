@@ -3,10 +3,6 @@
 
 A Terraform module to create ECS Cluster that relies on self-managed EC2 instances.
 
-## Notice
-
-This module depends on and includes configuration for the [terraform-aws-modules/terraform-aws-ecs](https://github.com/terraform-aws-modules/terraform-aws-ecs), which is licensed under the Apache License 2.0. You can find the original license in the `LICENSE` file of the public module.
-
 ## Requirements
 
 | Name | Version |
@@ -15,28 +11,35 @@ This module depends on and includes configuration for the [terraform-aws-modules
 
 ## Providers
 
-No providers.
+| Name | Version |
+|------|---------|
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.57.0 |
 
 ## Modules
 
-| Name | Source | Version |
-|------|--------|---------|
-| <a name="module_ecs_cluster"></a> [ecs\_cluster](#module\_ecs\_cluster) | terraform-aws-modules/ecs/aws//modules/cluster | ~> 5.11.3 |
+No modules.
 
 ## Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [aws_ecs_cluster.this](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/ecs_cluster) | resource |
 
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the ECS Cluster to create | `string` | `""` | no |
-| <a name="input_cluster_tags"></a> [cluster\_tags](#input\_cluster\_tags) | Resource Tags for ECS Cluster | `map(any)` | `{}` | no |
+| <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | Name of the ECS Cluster to create | `string` | n/a | yes |
+| <a name="input_execute_command_configuration"></a> [execute\_command\_configuration](#input\_execute\_command\_configuration) | Details of the execute command configuration | <pre>object({<br>    kms_key_id = optional(string)<br>    logging    = optional(string)<br>    log_configuration = optional(object({<br>      cloud_watch_encryption_enabled = optional(bool)<br>      cloud_watch_log_group_name     = optional(string)<br>      s3_bucket_name                 = optional(string)<br>      s3_bucket_encryption_enabled   = optional(bool)<br>      s3_key_prefix                  = optional(string)<br>    }))<br>  })</pre> | `null` | no |
+| <a name="input_service_connect_defaults"></a> [service\_connect\_defaults](#input\_service\_connect\_defaults) | Default Service Connect namespace | <pre>object({<br>    namespace = string<br>  })</pre> | `null` | no |
+| <a name="input_setting"></a> [setting](#input\_setting) | Details of the setting configuration | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Resource Tags for ECS Cluster | `map(any)` | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
 | <a name="output_cluster_arn"></a> [cluster\_arn](#output\_cluster\_arn) | ARN of the ECS Cluster |
+| <a name="output_cluster_id"></a> [cluster\_id](#output\_cluster\_id) | Identifier of the ECS Cluster |
+| <a name="output_cluster_name"></a> [cluster\_name](#output\_cluster\_name) | Name of the ECS Cluster |
 <!-- END_TF_DOCS -->
