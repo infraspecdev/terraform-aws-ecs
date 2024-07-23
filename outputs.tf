@@ -8,7 +8,7 @@ output "cluster_id" {
 }
 
 output "cluster_arn" {
-  description = "ARN of the ECS Cluster"
+  description = "ARN that identifies the cluster."
   value       = module.cluster.arn
 }
 
@@ -22,12 +22,12 @@ output "cluster_name" {
 ################################################################################
 
 output "asg_id" {
-  description = "Identifier of the Autoscaling group"
+  description = "Auto Scaling Group id."
   value       = module.asg.id
 }
 
 output "asg_arn" {
-  description = "ARN of the Autoscaling group"
+  description = "ARN for this Auto Scaling Group."
   value       = module.asg.arn
 }
 
@@ -36,12 +36,12 @@ output "asg_arn" {
 ################################################################################
 
 output "asg_launch_template_id" {
-  description = "Identifier of the Launch Template being used with the Autoscaling Group"
+  description = "The ID of the launch template."
   value       = module.asg.launch_template_id
 }
 
 output "asg_launch_template_arn" {
-  description = "ARN of the Launch Template being used with the Autoscaling Group"
+  description = "Amazon Resource Name (ARN) of the launch template."
   value       = module.asg.launch_template_arn
 }
 
@@ -50,16 +50,16 @@ output "asg_launch_template_arn" {
 ################################################################################
 
 output "asg_iam_role_id" {
-  description = "Identifier of the IAM Role being used with the IAM Instnace Profile"
+  description = "Name of the role."
   value       = module.asg.iam_role_id
 }
 
 output "asg_iam_instance_profile_id" {
-  description = "Identifier of the IAM Instance Profile being used with the Launch Template"
+  description = "Instance profile's ID."
   value       = module.asg.iam_instance_profile_id
 }
 
 output "asg_iam_instance_profile_arn" {
-  description = "ARN of the IAM Instance Profile being used with the Launch Template"
+  description = "ARN assigned by AWS to the instance profile."
   value       = module.asg.iam_instance_profile_arn
 }

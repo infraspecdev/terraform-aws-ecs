@@ -1,14 +1,10 @@
-################################################################################
-# ECS Cluster
-################################################################################
-
 variable "cluster_name" {
-  description = "Name of the ECS Cluster to create"
+  description = "(Required) Name of the cluster"
   type        = string
 }
 
 variable "cluster_setting" {
-  description = "Details of the setting configuration"
+  description = "(Optional) Configuration block(s) with cluster settings."
   type = list(object({
     name  = string
     value = string
@@ -17,8 +13,8 @@ variable "cluster_setting" {
 }
 
 variable "cluster_tags" {
-  description = "Resource Tags for ECS Cluster"
-  type        = map(any)
+  description = "(Optional) Key-value map of resource tags."
+  type        = map(string)
   default     = {}
 }
 
@@ -27,12 +23,12 @@ variable "cluster_tags" {
 ################################################################################
 
 variable "asg_name" {
-  description = "Name of the Autoscaling Group"
+  description = "(Optional) Name of the Auto Scaling Group."
   type        = string
 }
 
 variable "asg_vpc_zone_identifier" {
-  description = "Identifiers of the VPC Subnets"
+  description = "(Optional) List of subnet IDs to launch resources in."
   type        = list(string)
 
   validation {
@@ -42,7 +38,7 @@ variable "asg_vpc_zone_identifier" {
 }
 
 variable "asg_desired_capacity" {
-  description = "Desired capacity for the Autoscaling group"
+  description = "The number of Amazon EC2 instances that should be running in the group."
   type        = number
 
   validation {
@@ -52,7 +48,7 @@ variable "asg_desired_capacity" {
 }
 
 variable "asg_min_size" {
-  description = "Min. size for the Autoscaling group"
+  description = "Minimum size of the Auto Scaling Group"
   type        = number
 
   validation {
@@ -62,7 +58,7 @@ variable "asg_min_size" {
 }
 
 variable "asg_max_size" {
-  description = "Max. size for the Autoscaling group"
+  description = "Maximum size of the Auto Scaling Group"
   type        = number
 
   validation {
@@ -73,13 +69,13 @@ variable "asg_max_size" {
 
 variable "asg_instances_tags" {
   description = "Resources Tags to propagate to the Instances"
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
 variable "asg_tags" {
   description = "Resources Tags for Autoscaling group"
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
@@ -96,7 +92,7 @@ variable "asg_launch_template" {
     vpc_security_group_ids = optional(list(string), [])
     key_name               = optional(string, null)
     user_data              = optional(string, null)
-    tags                   = optional(map(any), {})
+    tags                   = optional(map(string), {})
   })
   default = {}
 }
@@ -123,13 +119,13 @@ variable "asg_launch_template_id" {
 ################################################################################
 
 variable "asg_iam_role_name" {
-  description = "Name for the IAM Role"
+  description = "(Optional, Forces new resource) Friendly name of the role."
   type        = string
   default     = null
 }
 
 variable "asg_iam_role_policy_attachments" {
-  description = "Policy ARNs to attach to the IAM Role"
+  description = "(Required) - The ARN of the policy you want to apply"
   type        = list(string)
   default = [
     "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
@@ -137,8 +133,8 @@ variable "asg_iam_role_policy_attachments" {
 }
 
 variable "asg_iam_role_tags" {
-  description = "Resource Tags for IAM Role"
-  type        = map(any)
+  description = "Key-value mapping of tags for the IAM role."
+  type        = map(string)
   default     = {}
 }
 
@@ -147,13 +143,13 @@ variable "asg_iam_role_tags" {
 ################################################################################
 
 variable "asg_iam_instance_profile_name" {
-  description = "Name of the IAM Instance Profile"
+  description = "(Optional, Forces new resource) Name of the instance profile."
   type        = string
   default     = null
 }
 
 variable "asg_iam_instance_profile_tags" {
-  description = "Resource Tags for the IAM Instance Profile"
-  type        = map(any)
+  description = "(Optional) Map of resource tags for the IAM Instance Profile."
+  type        = map(string)
   default     = {}
 }
