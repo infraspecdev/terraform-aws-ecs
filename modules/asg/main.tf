@@ -7,7 +7,7 @@ resource "aws_autoscaling_group" "this" {
   max_size         = var.max_size
 
   protect_from_scale_in = false
-  health_check_type     = "EC2"
+  health_check_type     = var.health_check_type
 
   launch_template {
     id = var.create_launch_template ? aws_launch_template.this[0].id : var.launch_template_id
@@ -63,11 +63,7 @@ resource "aws_launch_template" "this" {
 
         content {
           delete_on_termination = block_device_mappings.value.ebs.delete_on_termination
-          encrypted             = block_device_mappings.value.ebs.encrypted
-          iops                  = block_device_mappings.value.ebs.iops
-          kms_key_id            = block_device_mappings.value.ebs.kms_key_id
           snapshot_id           = block_device_mappings.value.ebs.snapshot_id
-          throughput            = block_device_mappings.value.ebs.throughput
           volume_size           = block_device_mappings.value.ebs.volume_size
           volume_type           = block_device_mappings.value.ebs.volume_type
         }
@@ -78,13 +74,7 @@ resource "aws_launch_template" "this" {
   iam_instance_profile {
     name = aws_iam_instance_profile.this.name
   }
-
-  user_data = try(var.launch_template.user_data, null) != null ? base64encode(var.launch_template.user_data) : base64encode(
-    <<-USERDATA
-      #!/bin/bash
-      echo ECS_CLUSTER="${var.cluster_name}" >> /etc/ecs/ecs.config
-    USERDATA
-  )
+  user_data = local.launch_template_user_data
 
   tags = var.launch_template.tags
 }

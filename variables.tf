@@ -97,11 +97,7 @@ variable "asg_launch_template" {
       device_name = string
       ebs = optional(object({
         delete_on_termination = optional(bool, null)
-        encrypted             = optional(any, null)
-        iops                  = optional(any, null)
-        kms_key_id            = optional(string, null)
         snapshot_id           = optional(string, null)
-        throughput            = optional(any, null)
         volume_size           = optional(number, null)
         volume_type           = optional(string, null)
       }))

@@ -28,15 +28,21 @@ variable "max_size" {
   type        = number
 }
 
+variable "health_check_type" {
+  description = "(Optional) \"EC2\" or \"ELB\". Controls how health checking is done."
+  type        = string
+  default     = "EC2"
+}
+
 variable "instances_tags" {
   description = "Resources Tags to propagate to the Instances"
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
 variable "tags" {
   description = "Resources Tags for Autoscaling group"
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
@@ -52,11 +58,7 @@ variable "launch_template" {
       device_name = string
       ebs = optional(object({
         delete_on_termination = optional(bool, null)
-        encrypted             = optional(any, null)
-        iops                  = optional(any, null)
-        kms_key_id            = optional(string, null)
         snapshot_id           = optional(string, null)
-        throughput            = optional(any, null)
         volume_size           = optional(number, null)
         volume_type           = optional(string, null)
       }))
@@ -68,7 +70,7 @@ variable "launch_template" {
     vpc_security_group_ids = optional(list(string), [])
     key_name               = optional(string, null)
     user_data              = optional(string, null)
-    tags                   = optional(map(any), {})
+    tags                   = optional(map(string), {})
   })
   default = {}
 }
@@ -105,7 +107,7 @@ variable "iam_role_policy_attachments" {
 
 variable "iam_role_tags" {
   description = "Key-value mapping of tags for the IAM role."
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
 
@@ -121,6 +123,6 @@ variable "iam_instance_profile_name" {
 
 variable "iam_instance_profile_tags" {
   description = "(Optional) Map of resource tags for the IAM Instance Profile."
-  type        = map(any)
+  type        = map(string)
   default     = {}
 }
