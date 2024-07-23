@@ -3,6 +3,12 @@ variable "cluster_name" {
   type        = string
 }
 
+variable "cluster_service_connect_namespace" {
+  description = "(Required) ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration."
+  type        = string
+  default     = null
+}
+
 variable "cluster_setting" {
   description = "(Optional) Configuration block(s) with cluster settings."
   type = list(object({

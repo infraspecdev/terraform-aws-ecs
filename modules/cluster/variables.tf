@@ -3,6 +3,12 @@ variable "name" {
   type        = string
 }
 
+variable "service_connect_namespace" {
+  description = "(Required) ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration."
+  type        = string
+  default     = null
+}
+
 variable "setting" {
   description = "Details of the setting configuration"
   type = list(object({

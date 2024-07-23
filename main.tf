@@ -5,9 +5,10 @@
 module "cluster" {
   source = "./modules/cluster"
 
-  name    = var.cluster_name
-  setting = var.cluster_setting
-  tags    = var.cluster_tags
+  name                      = var.cluster_name
+  service_connect_namespace = var.cluster_service_connect_namespace
+  setting                   = var.cluster_setting
+  tags                      = var.cluster_tags
 }
 
 ################################################################################

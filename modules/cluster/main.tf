@@ -7,6 +7,14 @@ resource "aws_ecs_cluster" "this" {
     }
   }
 
+  dynamic "service_connect_defaults" {
+    for_each = var.service_connect_namespace != null ? [1] : []
+
+    content {
+      namespace = var.service_connect_namespace
+    }
+  }
+
   dynamic "setting" {
     for_each = var.setting
     iterator = setting

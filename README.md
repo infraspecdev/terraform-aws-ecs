@@ -49,6 +49,7 @@ No resources.
 | <a name="input_asg_tags"></a> [asg\_tags](#input\_asg\_tags) | Resources Tags for Autoscaling group | `map(string)` | `{}` | no |
 | <a name="input_asg_vpc_zone_identifier"></a> [asg\_vpc\_zone\_identifier](#input\_asg\_vpc\_zone\_identifier) | (Optional) List of subnet IDs to launch resources in. | `list(string)` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | (Required) Name of the cluster | `string` | n/a | yes |
+| <a name="input_cluster_service_connect_namespace"></a> [cluster\_service\_connect\_namespace](#input\_cluster\_service\_connect\_namespace) | (Required) ARN of the aws\_service\_discovery\_http\_namespace that's used when you create a service and don't specify a Service Connect configuration. | `string` | `null` | no |
 | <a name="input_cluster_setting"></a> [cluster\_setting](#input\_cluster\_setting) | (Optional) Configuration block(s) with cluster settings. | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
 | <a name="input_cluster_tags"></a> [cluster\_tags](#input\_cluster\_tags) | (Optional) Key-value map of resource tags. | `map(string)` | `{}` | no |
 
