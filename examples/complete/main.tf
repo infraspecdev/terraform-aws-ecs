@@ -1,62 +1,28 @@
-provider "aws" {
-  region = local.region
-
-  default_tags {
-    tags = local.default_tags
-  }
-}
-
-locals {
-  region      = "ap-south-1"
-  name_prefix = "ex-"
-
-  # VPC
-  vpc_cidr            = "10.0.0.0/16"
-  vpc_azs             = ["ap-south-1a", "ap-south-1b"]
-  vpc_private_subnets = ["10.0.1.0/24", "10.0.2.0/24"]
-  vpc_public_subnets  = ["10.0.11.0/24", "10.0.12.0/24"]
-
-  # ECS Cluster
-  cluster_name = "${local.name_prefix}my-cluster"
-
-  default_tags = {
-    Environment = "Dev"
-    ManagedBy   = "Terraform"
-  }
-}
-
-################################################################################
-# ECS Module
-################################################################################
-
 module "ecs" {
   source = "../../"
 
-  cluster_name = local.cluster_name
+  cluster_name    = local.cluster_name
+  cluster_setting = local.cluster_setting
+  cluster_tags    = local.cluster_tags
 
-  setting = [
-    {
-      name  = "containerInsights"
-      value = "enabled"
-    }
-  ]
-}
+  # ASG Variables
+  asg_name                = local.asg_name
+  asg_vpc_zone_identifier = local.asg_vpc_zone_identifier
+  asg_desired_capacity    = local.asg_desired_capacity
+  asg_min_size            = local.asg_min_size
+  asg_max_size            = local.asg_max_size
+  asg_instances_tags      = local.asg_instances_tags
+  asg_tags                = local.asg_tags
 
-################################################################################
-# Supporting Resources
-################################################################################
+  # Launch Template
+  asg_create_launch_template = local.asg_create_launch_template
+  asg_launch_template        = local.asg_launch_template
 
-module "vpc" {
-  source  = "terraform-aws-modules/vpc/aws"
-  version = "~> 5.9.0"
+  # IAM Role
+  asg_iam_role_name = local.asg_iam_role_name
+  asg_iam_role_tags = local.asg_iam_role_tags
 
-  name = "${local.name_prefix}my-vpc"
-  cidr = local.vpc_cidr
-
-  azs             = local.vpc_azs
-  private_subnets = local.vpc_private_subnets
-  public_subnets  = local.vpc_public_subnets
-
-  enable_nat_gateway = true
-  enable_vpn_gateway = false
+  # IAM Instance Profile
+  asg_iam_instance_profile_name = local.asg_iam_instance_profile_name
+  asg_iam_instance_profile_tags = local.asg_iam_instance_profile_tags
 }
