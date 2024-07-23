@@ -53,14 +53,11 @@ resource "aws_launch_template" "this" {
     name = aws_iam_instance_profile.this.name
   }
 
-  user_data = base64encode(
-    try(
-      var.launch_template.user_data,
-      <<-USERDATA
-        #!/bin/bash
-        echo ECS_CLUSTER="${var.cluster_name}" >> /etc/ecs/ecs.config
-      USERDATA
-    )
+  user_data = try(var.launch_template.user_data, null) != null ? base64encode(var.launch_template.user_data) : base64encode(
+    <<-USERDATA
+      #!/bin/bash
+      echo ECS_CLUSTER="${var.cluster_name}" >> /etc/ecs/ecs.config
+    USERDATA
   )
 
   tags = var.launch_template.tags

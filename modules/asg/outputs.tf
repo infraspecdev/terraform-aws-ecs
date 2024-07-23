@@ -1,10 +1,10 @@
 output "id" {
-  description = "Identifier of the Autoscaling group"
+  description = "Auto Scaling Group id."
   value       = aws_autoscaling_group.this.id
 }
 
 output "arn" {
-  description = "ARN of the Autoscaling group"
+  description = "ARN for this Auto Scaling Group."
   value       = aws_autoscaling_group.this.arn
 }
 
@@ -13,12 +13,12 @@ output "arn" {
 ################################################################################
 
 output "launch_template_id" {
-  description = "Identifier of the Launch Template"
+  description = "The ID of the launch template."
   value       = var.create_launch_template ? aws_launch_template.this[0].id : var.launch_template_id
 }
 
 output "launch_template_arn" {
-  description = "ARN of the Launch Template"
+  description = "Amazon Resource Name (ARN) of the launch template."
   value       = var.create_launch_template ? aws_launch_template.this[0].arn : null
 }
 
@@ -27,16 +27,16 @@ output "launch_template_arn" {
 ################################################################################
 
 output "iam_role_id" {
-  description = "Identifier of the IAM Role"
+  description = "Name of the role."
   value       = aws_iam_role.this.id
 }
 
 output "iam_instance_profile_id" {
-  description = "Identifier of the IAM Instance Profile"
+  description = "Instance profile's ID."
   value       = aws_iam_instance_profile.this.id
 }
 
 output "iam_instance_profile_arn" {
-  description = "ARN of the IAM Instance Profile"
+  description = "ARN assigned by AWS to the instance profile."
   value       = aws_iam_instance_profile.this.arn
 }

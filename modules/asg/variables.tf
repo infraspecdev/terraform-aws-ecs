@@ -4,27 +4,27 @@ variable "cluster_name" {
 }
 
 variable "name" {
-  description = "Name of the Autoscaling Group"
+  description = "(Optional) Name of the Auto Scaling Group."
   type        = string
 }
 
 variable "vpc_zone_identifier" {
-  description = "Identifiers of the VPC Subnets"
+  description = "(Optional) List of subnet IDs to launch resources in."
   type        = list(string)
 }
 
 variable "desired_capacity" {
-  description = "Desired capacity for the Autoscaling group"
+  description = "The number of Amazon EC2 instances that should be running in the group."
   type        = number
 }
 
 variable "min_size" {
-  description = "Min. size for the Autoscaling group"
+  description = "Minimum size of the Auto Scaling Group"
   type        = number
 }
 
 variable "max_size" {
-  description = "Max. size for the Autoscaling group"
+  description = "Maximum size of the Auto Scaling Group"
   type        = number
 }
 
@@ -75,13 +75,13 @@ variable "launch_template_id" {
 ################################################################################
 
 variable "iam_role_name" {
-  description = "Name for the IAM Role"
+  description = "(Optional, Forces new resource) Friendly name of the role."
   type        = string
   default     = null
 }
 
 variable "iam_role_policy_attachments" {
-  description = "Policy ARNs to attach to the IAM Role"
+  description = "(Required) - The ARN of the policy you want to apply"
   type        = list(string)
   default = [
     "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
@@ -89,7 +89,7 @@ variable "iam_role_policy_attachments" {
 }
 
 variable "iam_role_tags" {
-  description = "Resource Tags for IAM Role"
+  description = "Key-value mapping of tags for the IAM role."
   type        = map(any)
   default     = {}
 }
@@ -99,13 +99,13 @@ variable "iam_role_tags" {
 ################################################################################
 
 variable "iam_instance_profile_name" {
-  description = "Name of the IAM Instance Profile"
+  description = "(Optional, Forces new resource) Name of the instance profile."
   type        = string
   default     = null
 }
 
 variable "iam_instance_profile_tags" {
-  description = "Resource Tags for the IAM Instance Profile"
+  description = "(Optional) Map of resource tags for the IAM Instance Profile."
   type        = map(any)
   default     = {}
 }
