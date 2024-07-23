@@ -49,6 +49,32 @@ resource "aws_launch_template" "this" {
   vpc_security_group_ids = var.launch_template.vpc_security_group_ids
   key_name               = var.launch_template.key_name
 
+  dynamic "block_device_mappings" {
+    for_each = try(var.launch_template.block_device_mappings, [])
+    iterator = block_device_mappings
+
+    content {
+      device_name  = block_device_mappings.value.device_name
+      no_device    = block_device_mappings.value.no_device
+      virtual_name = block_device_mappings.value.virtual_name
+
+      dynamic "ebs" {
+        for_each = try(block_device_mappings.value.ebs, null) != null ? [1] : []
+
+        content {
+          delete_on_termination = block_device_mappings.value.ebs.delete_on_termination
+          encrypted             = block_device_mappings.value.ebs.encrypted
+          iops                  = block_device_mappings.value.ebs.iops
+          kms_key_id            = block_device_mappings.value.ebs.kms_key_id
+          snapshot_id           = block_device_mappings.value.ebs.snapshot_id
+          throughput            = block_device_mappings.value.ebs.throughput
+          volume_size           = block_device_mappings.value.ebs.volume_size
+          volume_type           = block_device_mappings.value.ebs.volume_type
+        }
+      }
+    }
+  }
+
   iam_instance_profile {
     name = aws_iam_instance_profile.this.name
   }

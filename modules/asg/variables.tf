@@ -47,7 +47,22 @@ variable "tags" {
 variable "launch_template" {
   description = "Launch Template to use with the Autoscaling group"
   type = object({
-    name                   = optional(string, null)
+    name = optional(string, null)
+    block_device_mappings = optional(list(object({
+      device_name = string
+      ebs = optional(object({
+        delete_on_termination = optional(bool, null)
+        encrypted             = optional(any, null)
+        iops                  = optional(any, null)
+        kms_key_id            = optional(string, null)
+        snapshot_id           = optional(string, null)
+        throughput            = optional(any, null)
+        volume_size           = optional(number, null)
+        volume_type           = optional(string, null)
+      }))
+      no_device    = optional(any, null)
+      virtual_name = optional(string, null)
+    })), [])
     image_id               = optional(string, null)
     instance_type          = optional(string, null)
     vpc_security_group_ids = optional(list(string), [])
