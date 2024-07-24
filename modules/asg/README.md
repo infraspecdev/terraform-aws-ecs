@@ -47,9 +47,9 @@ No modules.
 | <a name="input_launch_template_id"></a> [launch\_template\_id](#input\_launch\_template\_id) | Identifier of the Launch Template | `string` | `null` | no |
 | <a name="input_max_size"></a> [max\_size](#input\_max\_size) | Maximum size of the Auto Scaling Group | `number` | n/a | yes |
 | <a name="input_min_size"></a> [min\_size](#input\_min\_size) | Minimum size of the Auto Scaling Group | `number` | n/a | yes |
-| <a name="input_name"></a> [name](#input\_name) | (Optional) Name of the Auto Scaling Group. | `string` | n/a | yes |
+| <a name="input_name"></a> [name](#input\_name) | (Optional) Name of the Auto Scaling Group. | `string` | `null` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Resources Tags for Autoscaling group | `map(string)` | `{}` | no |
-| <a name="input_vpc_zone_identifier"></a> [vpc\_zone\_identifier](#input\_vpc\_zone\_identifier) | (Optional) List of subnet IDs to launch resources in. | `list(string)` | n/a | yes |
+| <a name="input_vpc_zone_identifier"></a> [vpc\_zone\_identifier](#input\_vpc\_zone\_identifier) | (Optional) List of subnet IDs to launch resources in. | `list(string)` | `[]` | no |
 
 ## Outputs
 

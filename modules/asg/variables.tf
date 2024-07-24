@@ -6,11 +6,13 @@ variable "cluster_name" {
 variable "name" {
   description = "(Optional) Name of the Auto Scaling Group."
   type        = string
+  default     = null
 }
 
 variable "vpc_zone_identifier" {
   description = "(Optional) List of subnet IDs to launch resources in."
   type        = list(string)
+  default     = []
 }
 
 variable "desired_capacity" {
