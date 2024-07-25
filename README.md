@@ -35,6 +35,7 @@ No resources.
 |------|-------------|------|---------|:--------:|
 | <a name="input_asg_create_launch_template"></a> [asg\_create\_launch\_template](#input\_asg\_create\_launch\_template) | Either to create a Launch Template to associate with the Autoscaling group | `bool` | `true` | no |
 | <a name="input_asg_desired_capacity"></a> [asg\_desired\_capacity](#input\_asg\_desired\_capacity) | The number of Amazon EC2 instances that should be running in the group. | `number` | n/a | yes |
+| <a name="input_asg_health_check_type"></a> [asg\_health\_check\_type](#input\_asg\_health\_check\_type) | (Optional) "EC2" or "ELB". Controls how health checking is done. | `string` | `null` | no |
 | <a name="input_asg_iam_instance_profile_name"></a> [asg\_iam\_instance\_profile\_name](#input\_asg\_iam\_instance\_profile\_name) | (Optional, Forces new resource) Name of the instance profile. | `string` | `null` | no |
 | <a name="input_asg_iam_instance_profile_tags"></a> [asg\_iam\_instance\_profile\_tags](#input\_asg\_iam\_instance\_profile\_tags) | (Optional) Map of resource tags for the IAM Instance Profile. | `map(string)` | `{}` | no |
 | <a name="input_asg_iam_role_name"></a> [asg\_iam\_role\_name](#input\_asg\_iam\_role\_name) | (Optional, Forces new resource) Friendly name of the role. | `string` | `null` | no |
@@ -47,6 +48,7 @@ No resources.
 | <a name="input_asg_max_size"></a> [asg\_max\_size](#input\_asg\_max\_size) | Maximum size of the Auto Scaling Group | `number` | n/a | yes |
 | <a name="input_asg_min_size"></a> [asg\_min\_size](#input\_asg\_min\_size) | Minimum size of the Auto Scaling Group | `number` | n/a | yes |
 | <a name="input_asg_name"></a> [asg\_name](#input\_asg\_name) | (Optional) Name of the Auto Scaling Group. | `string` | n/a | yes |
+| <a name="input_asg_protect_from_scale_in"></a> [asg\_protect\_from\_scale\_in](#input\_asg\_protect\_from\_scale\_in) | (Optional) Whether newly launched instances are automatically protected from termination by Amazon EC2 Auto Scaling when scaling in. | `bool` | `null` | no |
 | <a name="input_asg_tags"></a> [asg\_tags](#input\_asg\_tags) | Resources Tags for Autoscaling group | `map(string)` | `{}` | no |
 | <a name="input_asg_vpc_zone_identifier"></a> [asg\_vpc\_zone\_identifier](#input\_asg\_vpc\_zone\_identifier) | (Optional) List of subnet IDs to launch resources in. | `list(string)` | n/a | yes |
 | <a name="input_cluster_name"></a> [cluster\_name](#input\_cluster\_name) | (Required) Name of the cluster | `string` | n/a | yes |

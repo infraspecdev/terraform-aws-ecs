@@ -16,12 +16,13 @@ run "asg_attributes_match" {
   variables {
     cluster_name = "example-cluster-name"
 
-    name                = "example-asg-name"
-    vpc_zone_identifier = ["subnet-12345678901234", "subnet-12345678901235"]
-    desired_capacity    = 7
-    min_size            = 1
-    max_size            = 10
-    health_check_type   = "ELB"
+    name                  = "example-asg-name"
+    vpc_zone_identifier   = ["subnet-12345678901234", "subnet-12345678901235"]
+    desired_capacity      = 7
+    min_size              = 1
+    max_size              = 10
+    protect_from_scale_in = true
+    health_check_type     = "ELB"
 
     create_launch_template  = false
     launch_template_id      = "lt-068f72b729example"
@@ -65,7 +66,7 @@ run "asg_attributes_match" {
   }
 
   assert {
-    condition     = aws_autoscaling_group.this.protect_from_scale_in == false
+    condition     = aws_autoscaling_group.this.protect_from_scale_in == var.protect_from_scale_in
     error_message = "Protect from scale in mismatch"
   }
 

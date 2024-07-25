@@ -73,6 +73,18 @@ variable "asg_max_size" {
   }
 }
 
+variable "asg_protect_from_scale_in" {
+  description = " (Optional) Whether newly launched instances are automatically protected from termination by Amazon EC2 Auto Scaling when scaling in."
+  type        = bool
+  default     = null
+}
+
+variable "asg_health_check_type" {
+  description = "(Optional) \"EC2\" or \"ELB\". Controls how health checking is done."
+  type        = string
+  default     = null
+}
+
 variable "asg_instances_tags" {
   description = "Resources Tags to propagate to the Instances"
   type        = map(string)

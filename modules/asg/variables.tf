@@ -30,6 +30,12 @@ variable "max_size" {
   type        = number
 }
 
+variable "protect_from_scale_in" {
+  description = " (Optional) Whether newly launched instances are automatically protected from termination by Amazon EC2 Auto Scaling when scaling in."
+  type        = bool
+  default     = false
+}
+
 variable "health_check_type" {
   description = "(Optional) \"EC2\" or \"ELB\". Controls how health checking is done."
   type        = string

@@ -20,13 +20,15 @@ module "asg" {
 
   cluster_name = module.cluster.name
 
-  name                = var.asg_name
-  vpc_zone_identifier = var.asg_vpc_zone_identifier
-  desired_capacity    = var.asg_desired_capacity
-  min_size            = var.asg_min_size
-  max_size            = var.asg_max_size
-  instances_tags      = var.asg_instances_tags
-  tags                = var.asg_tags
+  name                  = var.asg_name
+  vpc_zone_identifier   = var.asg_vpc_zone_identifier
+  desired_capacity      = var.asg_desired_capacity
+  min_size              = var.asg_min_size
+  max_size              = var.asg_max_size
+  protect_from_scale_in = var.asg_protect_from_scale_in
+  health_check_type     = var.asg_health_check_type
+  instances_tags        = var.asg_instances_tags
+  tags                  = var.asg_tags
 
   # Launch Template
   create_launch_template  = var.asg_create_launch_template

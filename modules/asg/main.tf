@@ -6,7 +6,7 @@ resource "aws_autoscaling_group" "this" {
   min_size         = var.min_size
   max_size         = var.max_size
 
-  protect_from_scale_in = false
+  protect_from_scale_in = var.protect_from_scale_in
   health_check_type     = var.health_check_type
 
   launch_template {
