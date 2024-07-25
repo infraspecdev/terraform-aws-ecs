@@ -23,8 +23,9 @@ run "asg_attributes_match" {
     max_size            = 10
     health_check_type   = "ELB"
 
-    create_launch_template = false
-    launch_template_id     = "lt-068f72b729example"
+    create_launch_template  = false
+    launch_template_id      = "lt-068f72b729example"
+    launch_template_version = "$Default"
 
     iam_role_policy_attachments = [
       "arn:aws:iam::aws:policy/abcd/efgh"
@@ -76,6 +77,11 @@ run "asg_attributes_match" {
   assert {
     condition     = aws_autoscaling_group.this.launch_template[0].id == var.launch_template_id
     error_message = "Launch template id mismatch"
+  }
+
+  assert {
+    condition     = aws_autoscaling_group.this.launch_template[0].version == var.launch_template_version
+    error_message = "Launch template version mismatch"
   }
 
   assert {

@@ -29,9 +29,10 @@ module "asg" {
   tags                = var.asg_tags
 
   # Launch Template
-  create_launch_template = var.asg_create_launch_template
-  launch_template_id     = var.asg_launch_template_id
-  launch_template        = var.asg_launch_template
+  create_launch_template  = var.asg_create_launch_template
+  launch_template_id      = var.asg_launch_template_id
+  launch_template         = var.asg_launch_template
+  launch_template_version = var.asg_launch_template_version
 
   # IAM Role
   iam_role_name               = var.asg_iam_role_name

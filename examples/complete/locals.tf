@@ -33,6 +33,7 @@ locals {
     key_name           = "test-atlantis"
     security_group_ids = []
   }
+  asg_launch_template_version = "$Latest"
 
   # IAM Role Variables
   asg_iam_role_name = "my-asg-role"

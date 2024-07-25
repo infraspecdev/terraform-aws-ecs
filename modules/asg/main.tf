@@ -10,7 +10,8 @@ resource "aws_autoscaling_group" "this" {
   health_check_type     = var.health_check_type
 
   launch_template {
-    id = var.create_launch_template ? aws_launch_template.this[0].id : var.launch_template_id
+    id      = var.create_launch_template ? aws_launch_template.this[0].id : var.launch_template_id
+    version = var.launch_template_version != null ? var.launch_template_version : null
   }
 
   dynamic "tag" {

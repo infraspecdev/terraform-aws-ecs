@@ -131,6 +131,12 @@ variable "asg_launch_template_id" {
   }
 }
 
+variable "asg_launch_template_version" {
+  description = "(Optional) Template version."
+  type        = string
+  default     = null
+}
+
 ################################################################################
 ### IAM Role
 ################################################################################

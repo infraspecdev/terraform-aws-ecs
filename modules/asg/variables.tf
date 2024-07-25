@@ -84,9 +84,15 @@ variable "create_launch_template" {
 }
 
 variable "launch_template_id" {
-  description = "Identifier of the Launch Template"
+  description = "(Optional) ID of the launch template."
   type        = string
   default     = null
+}
+
+variable "launch_template_version" {
+  description = "(Optional) Template version."
+  type        = string
+  default     = "$Latest"
 }
 
 ################################################################################

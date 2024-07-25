@@ -15,8 +15,9 @@ module "ecs" {
   asg_tags                = local.asg_tags
 
   # Launch Template
-  asg_create_launch_template = local.asg_create_launch_template
-  asg_launch_template        = local.asg_launch_template
+  asg_create_launch_template  = local.asg_create_launch_template
+  asg_launch_template         = local.asg_launch_template
+  asg_launch_template_version = local.asg_launch_template_version
 
   # IAM Role
   asg_iam_role_name = local.asg_iam_role_name
