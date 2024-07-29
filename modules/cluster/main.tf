@@ -1,9 +1,13 @@
+locals {
+  cluster_logging = "NONE"
+}
+
 resource "aws_ecs_cluster" "this" {
   name = var.name
 
   configuration {
     execute_command_configuration {
-      logging = "NONE"
+      logging = local.cluster_logging
     }
   }
 
