@@ -4,7 +4,7 @@ variable "name" {
 }
 
 variable "service_connect_namespace" {
-  description = "(Required) ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration."
+  description = "(Optional) ARN of the aws_service_discovery_http_namespace that's used when you create a service and don't specify a Service Connect configuration."
   type        = string
   default     = null
 }
