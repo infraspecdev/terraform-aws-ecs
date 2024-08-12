@@ -1,6 +1,7 @@
 variable "name" {
   description = "Name of the ECS Cluster to create"
   type        = string
+  nullable    = false
 }
 
 variable "service_connect_namespace" {
@@ -15,11 +16,13 @@ variable "setting" {
     name  = string
     value = string
   }))
-  default = []
+  nullable = false
+  default  = []
 }
 
 variable "tags" {
   description = "Resource Tags for ECS Cluster"
   type        = map(any)
+  nullable    = false
   default     = {}
 }
