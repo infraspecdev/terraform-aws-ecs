@@ -1,6 +1,7 @@
 variable "cluster_name" {
   description = "Name of the ECS Cluster to associate with the Autoscaling Group"
   type        = string
+  nullable    = false
 }
 
 variable "name" {
@@ -12,6 +13,7 @@ variable "name" {
 variable "vpc_zone_identifier" {
   description = "(Optional) List of subnet IDs to launch resources in."
   type        = list(string)
+  nullable    = false
   default     = []
 }
 
@@ -33,30 +35,41 @@ variable "max_size" {
 variable "protect_from_scale_in" {
   description = " (Optional) Whether newly launched instances are automatically protected from termination by Amazon EC2 Auto Scaling when scaling in."
   type        = bool
+  nullable    = false
   default     = false
 }
 
 variable "health_check_type" {
   description = "(Optional) \"EC2\" or \"ELB\". Controls how health checking is done."
   type        = string
+  nullable    = false
   default     = "EC2"
 }
 
 variable "instances_tags" {
   description = "Resources Tags to propagate to the Instances"
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
 variable "tags" {
   description = "Resources Tags for Autoscaling group"
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
 ################################################################################
 # Launch Template
 ################################################################################
+
+variable "create_launch_template" {
+  description = "Either to create a Launch Template to associate with the Autoscaling group"
+  type        = bool
+  nullable    = false
+  default     = true
+}
 
 variable "launch_template" {
   description = "Launch Template to use with the Autoscaling group"
@@ -80,13 +93,8 @@ variable "launch_template" {
     user_data              = optional(string, null)
     tags                   = optional(map(string), {})
   })
-  default = {}
-}
-
-variable "create_launch_template" {
-  description = "Either to create a Launch Template to associate with the Autoscaling group"
-  type        = bool
-  default     = true
+  nullable = false
+  default  = {}
 }
 
 variable "launch_template_id" {
@@ -114,6 +122,7 @@ variable "iam_role_name" {
 variable "iam_role_policy_attachments" {
   description = "(Required) - The ARN of the policy you want to apply"
   type        = list(string)
+  nullable    = false
   default = [
     "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
   ]
@@ -122,6 +131,7 @@ variable "iam_role_policy_attachments" {
 variable "iam_role_tags" {
   description = "Key-value mapping of tags for the IAM role."
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
@@ -138,5 +148,6 @@ variable "iam_instance_profile_name" {
 variable "iam_instance_profile_tags" {
   description = "(Optional) Map of resource tags for the IAM Instance Profile."
   type        = map(string)
+  nullable    = false
   default     = {}
 }
