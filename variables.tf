@@ -1,6 +1,7 @@
 variable "cluster_name" {
   description = "(Required) Name of the cluster"
   type        = string
+  nullable    = false
 }
 
 variable "cluster_service_connect_namespace" {
@@ -15,12 +16,14 @@ variable "cluster_setting" {
     name  = string
     value = string
   }))
-  default = []
+  nullable = false
+  default  = []
 }
 
 variable "cluster_tags" {
   description = "(Optional) Key-value map of resource tags."
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
@@ -31,11 +34,14 @@ variable "cluster_tags" {
 variable "asg_name" {
   description = "(Optional) Name of the Auto Scaling Group."
   type        = string
+  default     = null
 }
 
 variable "asg_vpc_zone_identifier" {
   description = "(Optional) List of subnet IDs to launch resources in."
   type        = list(string)
+  nullable    = false
+  default     = []
 
   validation {
     condition     = alltrue([for subnet_id in var.asg_vpc_zone_identifier : startswith(subnet_id, "subnet-")])
@@ -48,7 +54,7 @@ variable "asg_desired_capacity" {
   type        = number
 
   validation {
-    condition     = var.asg_desired_capacity >= 0
+    condition     = try(var.asg_desired_capacity >= 0, true)
     error_message = "Specified desired capacity must be a valid non-negative number."
   }
 }
@@ -58,7 +64,7 @@ variable "asg_min_size" {
   type        = number
 
   validation {
-    condition     = var.asg_min_size >= 0
+    condition     = try(var.asg_min_size >= 0, true)
     error_message = "Specified min. size must be a valid non-negative number."
   }
 }
@@ -68,7 +74,7 @@ variable "asg_max_size" {
   type        = number
 
   validation {
-    condition     = var.asg_max_size >= 0
+    condition     = try(var.asg_max_size >= 0, null)
     error_message = "Specified max. size must be a valid non-negative number."
   }
 }
@@ -76,30 +82,41 @@ variable "asg_max_size" {
 variable "asg_protect_from_scale_in" {
   description = " (Optional) Whether newly launched instances are automatically protected from termination by Amazon EC2 Auto Scaling when scaling in."
   type        = bool
-  default     = null
+  nullable    = false
+  default     = false
 }
 
 variable "asg_health_check_type" {
   description = "(Optional) \"EC2\" or \"ELB\". Controls how health checking is done."
   type        = string
-  default     = null
+  nullable    = false
+  default     = "EC2"
 }
 
 variable "asg_instances_tags" {
   description = "Resources Tags to propagate to the Instances"
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
 variable "asg_tags" {
   description = "Resources Tags for Autoscaling group"
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
 ################################################################################
 ### Launch Template
 ################################################################################
+
+variable "asg_create_launch_template" {
+  description = "Either to create a Launch Template to associate with the Autoscaling group"
+  type        = bool
+  nullable    = false
+  default     = true
+}
 
 variable "asg_launch_template" {
   description = "Launch Template to use with the Autoscaling group"
@@ -123,13 +140,8 @@ variable "asg_launch_template" {
     user_data              = optional(string, null)
     tags                   = optional(map(string), {})
   })
-  default = {}
-}
-
-variable "asg_create_launch_template" {
-  description = "Either to create a Launch Template to associate with the Autoscaling group"
-  type        = bool
-  default     = true
+  nullable = false
+  default  = {}
 }
 
 variable "asg_launch_template_id" {
@@ -146,7 +158,7 @@ variable "asg_launch_template_id" {
 variable "asg_launch_template_version" {
   description = "(Optional) Template version."
   type        = string
-  default     = null
+  default     = "$Default"
 }
 
 ################################################################################
@@ -160,8 +172,9 @@ variable "asg_iam_role_name" {
 }
 
 variable "asg_iam_role_policy_attachments" {
-  description = "(Required) - The ARN of the policy you want to apply"
+  description = "(Optional) - The ARNs of the policies you want to apply"
   type        = list(string)
+  nullable    = false
   default = [
     "arn:aws:iam::aws:policy/service-role/AmazonEC2ContainerServiceforEC2Role"
   ]
@@ -170,6 +183,7 @@ variable "asg_iam_role_policy_attachments" {
 variable "asg_iam_role_tags" {
   description = "Key-value mapping of tags for the IAM role."
   type        = map(string)
+  nullable    = false
   default     = {}
 }
 
@@ -186,5 +200,6 @@ variable "asg_iam_instance_profile_name" {
 variable "asg_iam_instance_profile_tags" {
   description = "(Optional) Map of resource tags for the IAM Instance Profile."
   type        = map(string)
+  nullable    = false
   default     = {}
 }
