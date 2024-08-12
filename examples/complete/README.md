@@ -9,7 +9,7 @@ Configuration in this directory creates:
 ## Example tfvars file
 
 ```text
-cluster_name = "cluster"
+cluster_name = "your-cluster-name"
 cluster_setting = [
   {
     name  = "containerInsights"
@@ -17,42 +17,46 @@ cluster_setting = [
   }
 ]
 cluster_tags = {
-  Project = "project"
+  ManagedBy = "Terraform"
+  Owner     = "owner-name"
 }
 
-# Autoscaling Group Variables
-asg_name                = "my-asg"
-asg_vpc_zone_identifier = ["subnet-1341324123", "subnet-13241234123"]
-asg_desired_capacity    = 2
+asg_name                = "your-asg-name"
+asg_vpc_zone_identifier = ["subnet-0123456789abcdefg", "subnet-0123456789abcdefg"]
+asg_desired_capacity    = 1
 asg_min_size            = 1
-asg_max_size            = 3
+asg_max_size            = 1
 asg_instances_tags = {
-  Name = "instance"
+  ManagedBy = "Terraform"
+  Owner     = "owner-name"
 }
 asg_tags = {
-  Project = "project"
+  ManagedBy = "Terraform"
+  Owner     = "owner-name"
 }
 
-# Launch Template Variables
+# Launch Template
 asg_create_launch_template = true
 asg_launch_template = {
-  image_id           = "ami-068e0f1a600cd311c"
-  instance_type      = "t2.micro"
-  key_name           = "<actual-key-name>"
-  security_group_ids = []
+  image_id           = "ami-0123456789abcdefg"
+  instance_type      = "your-instance-type"
+  key_name           = "your-key-name"
+  security_group_ids = ["sg-0f1234567890abcdef"]
 }
-asg_launch_template_version = "<actual-version>"
+asg_launch_template_version = "your-launch-template-version"
 
-# IAM Role Variables
-asg_iam_role_name = "asg-role"
+# Launch Template IAM Role
+asg_iam_role_name = "your-iam-role-name"
 asg_iam_role_tags = {
-  Project = "project"
+  ManagedBy = "Terraform"
+  Owner     = "owner-name"
 }
 
-# IAM Instance Profile Variables
-asg_iam_instance_profile_name = "asg-instance-profile"
+# Launch Template IAM Instance Profile
+asg_iam_instance_profile_name = "your-iam-instance-profile-name"
 asg_iam_instance_profile_tags = {
-  Project = "project"
+  ManagedBy = "Terraform"
+  Owner     = "owner-name"
 }
 ```
 
