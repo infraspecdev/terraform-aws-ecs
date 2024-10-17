@@ -30,7 +30,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_name"></a> [name](#input\_name) | Name of the ECS Cluster to create | `string` | n/a | yes |
 | <a name="input_service_connect_namespace"></a> [service\_connect\_namespace](#input\_service\_connect\_namespace) | (Optional) ARN of the aws\_service\_discovery\_http\_namespace that's used when you create a service and don't specify a Service Connect configuration. | `string` | `null` | no |
-| <a name="input_setting"></a> [setting](#input\_setting) | Details of the setting configuration | <pre>list(object({<br>    name  = string<br>    value = string<br>  }))</pre> | `[]` | no |
+| <a name="input_setting"></a> [setting](#input\_setting) | Details of the setting configuration | <pre>list(object({<br/>    name  = string<br/>    value = string<br/>  }))</pre> | `[]` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | Resource Tags for ECS Cluster | `map(any)` | `{}` | no |
 
 ## Outputs
